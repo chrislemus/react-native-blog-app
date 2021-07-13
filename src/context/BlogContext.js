@@ -27,13 +27,13 @@ function blogReducer(state, action) {
 const addBlogPost = (dispatch) => {
   return (title, content, callback) => {
     dispatch({type: 'add_blogpost', payload: {title, content}});
-    callback()
+    if(callback) callback();
   }
 }
 const editBlogPost = (dispatch) => {
   return (title, content, id, callback) => {
     dispatch({type: 'edit_blogpost', payload: {title, content, id}});
-    callback()
+    if(callback) callback();
   }
 }
 
