@@ -1,21 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Provider } from './src/context/BlogContext';
+import Index from "./src/screens";
+import Show from './src/screens/Show'
+import Create from './src/screens/Create'
+import Edit from './src/screens/Edit'
+const Stack = createStackNavigator();
 
-export default function App() {
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="BlogIndex" component={Index} options={{ title: 'Home' }}/>
+        <Stack.Screen name="Show" component={Show} options={{ title: 'Show' }}/>
+        <Stack.Screen name="Create" component={Create} options={{ title: 'Create Blog' }}/>
+        <Stack.Screen name="Edit" component={Edit} options={{ title: 'Edit Blog' }}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default () => {
+  return(
+    <Provider>  
+      <App/>
+    </Provider>
+  )
+};
