@@ -6,17 +6,7 @@ function blogReducer(state, action) {
     case 'add_blogpost':
       return [...state, {title: action.payload.title, content: action.payload.content, id: randId()}] 
     case 'edit_blogpost':
-      return [...state.map(post => {
-        if (post.id === action.payload.id) {
-          return {
-            id: action.payload.id,
-            title: action.payload.title,
-            content: action.payload.content
-          }
-        } else {
-          return post
-        }
-      })] 
+      return [...state.map(post => post.id === action.payload.id ? action.payload : post)] 
     case 'delete_blogpost':
       return [...state.filter(blog => blog.id !== action.payload)] 
     default:

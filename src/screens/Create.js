@@ -15,11 +15,6 @@ export default function Create({navigation}) {
   return (
     <View >
       <BlogForm onSubmit={onSubmit}/>
-      {/* <Text style={styles.label}>Enter Title:</Text>
-      <TextInput value={title} onChangeText={val => setTitle(val)} style={styles.input}/>
-      <Text style={styles.label}>Enter Content:</Text>
-      <TextInput value={content} onChangeText={val => setContent(val)} style={styles.input}/>
-      <Button title="Add Blog Post" onPress={() => addBlogPost(title, content, navigateHome)}/> */}
     </View>
   );
 }

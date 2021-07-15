@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useContext,useLayoutEffect} from 'react';
-import { StyleSheet, Text, View, FlatList, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import {Context} from '../context/BlogContext';
 import {Feather} from '@expo/vector-icons'
 
  function BlogIndex({navigation}) {
-  const {state, addBlogPost, deleteBlogPost} = useContext(Context)
+  const {state, deleteBlogPost} = useContext(Context)
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -19,8 +19,7 @@ import {Feather} from '@expo/vector-icons'
 
   return (
     <View style={styles.container}>
-      <Text>Home</Text>
-      {/* <Button title="Add Post" onPress={addBlogPost}/> */}
+
       <FlatList 
         data={state}
         keyExtractor={item => `${item.id}`}

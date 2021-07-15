@@ -1,9 +1,7 @@
-import React, {useContext, useLayoutEffect, useState, useEffect} from 'react';
+import React, {useContext} from 'react';
 import {Context} from '../context/BlogContext';
-import { StyleSheet, Text, View, FlatList, Button, TouchableOpacity, TextInput} from 'react-native';
+import { View} from 'react-native';
 import BlogForm from '../Components/BlogForm'
-
-import {EvilIcons}from '@expo/vector-icons'
 
 export default function Edit({route, navigation}) {
   const blogId = route.params.id

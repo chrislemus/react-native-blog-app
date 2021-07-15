@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   input: {
-    fontSize: 8,
+    fontSize: 18,
     borderWidth: 1,
     borderColor: 'black',
     marginBottom:15,
