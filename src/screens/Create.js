@@ -1,20 +1,18 @@
-import React, {useContext} from 'react';
-import {Context} from '../context/BlogContext';
-import BlogForm from '../Components/BlogForm'
+import React, { useContext } from 'react';
+import { Context } from '../context/BlogContext';
+import BlogForm from '../Components/BlogForm';
 import { StyleSheet, View } from 'react-native';
 
-
-export default function Create({navigation}) {
-
-  const {addBlogPost} = useContext(Context)
-  const navigateHome = () => navigation.navigate("BlogIndex")
+export default function Create({ navigation }) {
+  const { addBlogPost } = useContext(Context);
+  const navigateHome = () => navigation.pop();
   const onSubmit = (title, content) => {
-    addBlogPost(title, content, navigateHome)
-  }
+    addBlogPost(title, content, navigateHome);
+  };
 
   return (
-    <View >
-      <BlogForm onSubmit={onSubmit}/>
+    <View>
+      <BlogForm onSubmit={onSubmit} />
     </View>
   );
 }

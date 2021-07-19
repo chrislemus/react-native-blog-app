@@ -1,17 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useContext,useLayoutEffect} from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
-import {Context} from '../context/BlogContext';
-import {Feather} from '@expo/vector-icons'
+import React, { useContext, useLayoutEffect, useEffect } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
+import { Context } from '../context/BlogContext';
+import { Feather } from '@expo/vector-icons';
 
- function BlogIndex({navigation}) {
-  const {state, deleteBlogPost} = useContext(Context)
+function BlogIndex({ navigation }) {
+  const { state, deleteBlogPost, getBlogPosts } = useContext(Context);
+
+  useEffect(() => {
+    getBlogPosts();
+    const listener = navigation.addListener('focus', () => getBlogPosts());
+    return () => listener.remove;
+  }, []);
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.navigate("Create")}>
-          <Feather name="plus" size={30}/>
+        <TouchableOpacity onPress={() => navigation.navigate('Create')}>
+          <Feather name="plus" size={30} />
         </TouchableOpacity>
       ),
     });
@@ -19,21 +31,22 @@ import {Feather} from '@expo/vector-icons'
 
   return (
     <View style={styles.container}>
-
-      <FlatList 
+      <FlatList
         data={state}
-        keyExtractor={item => `${item.id}`}
-        renderItem={({item}) => {
-          return(
-            <TouchableOpacity onPress={() => navigation.navigate("Show", {id: item.id})}>
+        keyExtractor={(item) => `${item.id}`}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Show', { id: item.id })}
+            >
               <View style={styles.row}>
                 <Text style={styles.title}>{item.title}</Text>
                 <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
-                  <Feather name='trash' style={styles.icon}/>
+                  <Feather name="trash" style={styles.icon} />
                 </TouchableOpacity>
               </View>
             </TouchableOpacity>
-          )
+          );
         }}
       />
       <StatusBar style="auto" />
@@ -48,16 +61,16 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     borderTopWidth: 1,
     borderColor: 'gray',
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   icon: {
     fontSize: 24,
-    color: 'red'
-  }
+    color: 'red',
+  },
 });
 
-export default BlogIndex
+export default BlogIndex;
